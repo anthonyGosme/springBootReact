@@ -5,10 +5,10 @@ import org.springframework.boot.test.context.SpringBootTest;
 
 
 @SpringBootTest
-class CardatabaseApplicationTests {
+class CarDatabaseApplicationTests {
 
-	@Test
-	void contextLoads() {
-	}
+    @Test
+    void contextLoads() {
+    }
 
 }
