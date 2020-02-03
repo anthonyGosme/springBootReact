@@ -36,20 +36,19 @@ public class CarDatabaseApplication {
     @Bean
     CommandLineRunner runner() {
         return args -> {
-            Set<Owner>  ownerSet1 = new HashSet<>() ;
-            Owner owner1 = new Owner("John", "Johnson") ;
-            ownerSet1.add(owner1) ;
-            Set<Owner>  ownerSet2 = new HashSet<>() ;
-            Owner owner2 = new Owner("Mary", "Robinson") ;
-            ownerSet2.add(owner2) ;
+            Owner owner1 = new Owner("John", "Johnson");
             ownerRepository.save(owner1);
+            Owner owner2 = new Owner("Mary", "Robinson");
             ownerRepository.save(owner2);
-            Car car1 = new Car(LocalTime.now() ,"Ford", "Mustang", "red", "ADF-1121", 2017, 59000, owner1);
-            Car car2 = new Car(LocalTime.now() ,"Nissan", "Leaf", "green", "BAF-1122", 2018, 69000, owner2);
-            Car car3 = new Car(LocalTime.now() ,"Toyota", "Prius", "silver", "ZZZ-1123", 2019, 79000, owner2);
+            Car car1 = new Car(LocalTime.now(), "Ford", "Mustang", "red", "ADF-1121", 2017, 59000, owner1);
+            Car car2 = new Car(LocalTime.now(), "Nissan", "Leaf", "green", "BAF-1122", 2018, 69000, owner2);
+            Car car3 = new Car(LocalTime.now(), "Toyota", "Prius", "silver", "ZZZ-1123", 2019, 79000, owner2);
             carRepository.save(car1);
             carRepository.save(car2);
             carRepository.save(car3);
+
+            Set<Owner> ownerSet1 = new HashSet<>();
+            ownerSet1.add(owner1);
         };
     }
 
