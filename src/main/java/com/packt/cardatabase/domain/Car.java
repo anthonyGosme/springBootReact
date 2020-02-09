@@ -9,8 +9,7 @@ import java.time.LocalTime;
 
 
 @Entity // disable for constructor generator to work
-@Getter
-@Setter
+@Getter @Setter
 public class Car {
     LocalTime localTime;
     @Id
