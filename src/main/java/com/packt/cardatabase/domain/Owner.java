@@ -38,7 +38,7 @@ public class Owner {
 
 
     public List<Car> getCars() {
-        return new ArrayList<Car>(this.cars);
+        return new ArrayList<>(this.cars);
 
     }
 

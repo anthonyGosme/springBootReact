@@ -1,9 +1,6 @@
 package com.packt.cardatabase;
 
-import com.packt.cardatabase.domain.Car;
-import com.packt.cardatabase.domain.CarRepository;
-import com.packt.cardatabase.domain.Owner;
-import com.packt.cardatabase.domain.OwnerRepository;
+import com.packt.cardatabase.domain.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,8 +10,6 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 
 import java.time.LocalTime;
-import java.util.HashSet;
-import java.util.Set;
 
 
 //@SpringBootApplication =  @EnableAutoConfiguration + @ComponentScan + @Configure
@@ -26,7 +21,7 @@ public class CarDatabaseApplication {
     private CarRepository carRepository;
     @Autowired
     private OwnerRepository ownerRepository;
-
+    @Autowired  UserRepository userRepository ;
     public static void main(String[] args) {
 
         SpringApplication.run(CarDatabaseApplication.class, args);
@@ -46,9 +41,8 @@ public class CarDatabaseApplication {
             carRepository.save(car1);
             carRepository.save(car2);
             carRepository.save(car3);
-
-            Set<Owner> ownerSet1 = new HashSet<>();
-            ownerSet1.add(owner1);
+            userRepository.save(new User("user" ,"{bcrypt}$2a$04$/Ws7Jb1EmQdRYvWnBYsLhOoz03Iolr61WnBI6UnYG6DdchGqBV/pS","USER"))  ;
+            userRepository.save(new User("admin","{bcrypt}$2a$04$/Ws7Jb1EmQdRYvWnBYsLhOoz03Iolr61WnBI6UnYG6DdchGqBV/pS","ADMIN"))  ;
         };
     }
 
