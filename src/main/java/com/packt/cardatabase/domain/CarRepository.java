@@ -9,12 +9,12 @@ import java.util.List;
 @RepositoryRestResource
 public interface CarRepository extends CrudRepository<Car, Long> {
 
-    @Query("select c from Car c where c.brand like  %?1")
-    List<Car> findByBrandEndsWith(String brand);
+  @Query("select c from Car c where c.brand like  %?1")
+  List<Car> findByBrandEndsWith(String brand);
 
-    List<Car> findByColor(String color);
+  List<Car> findByColor(String color);
 
-    List<Car> findByBrandAndModel(String brand, String model);
+  List<Car> findByBrandAndModel(String brand, String model);
 
-    List<Car> findByBrandOrderByYearAsc(String brand);
+  List<Car> findByBrandOrderByYearAsc(String brand);
 }

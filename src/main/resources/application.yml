@@ -1,0 +1,24 @@
+logging:
+  level:
+    root: info
+server:
+  port: 8081
+spring:
+  data:
+    rest:
+      base-path: /api
+  datasource:
+    driver-class-name: org.mariadb.jdbc.Driver
+    password: password
+    url: jdbc:mariadb://localhost:3306/cardb
+    username: dbuser
+  h2:
+    console:
+      enabled: true
+      path: /h2
+  jpa:
+    generate-ddl: true
+    hibernate:
+      ddl-auto: create-drop
+    open-in-view: false
+    show-sql: true
