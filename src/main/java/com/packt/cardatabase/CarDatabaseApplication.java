@@ -45,7 +45,7 @@ public class CarDatabaseApplication {
       userRepository.save(
           new User(
               "user",
-              "{bcrypt}$2a$04$/Ws7Jb1EmQdRYvWnBYsLhOoz03Iolr61WnBI6UnYG6DdchGqBV/pS",
+              "$2a$04$/Ws7Jb1EmQdRYvWnBYsLhOoz03Iolr61WnBI6UnYG6DdchGqBV/pS",
               "USER"));
       userRepository.save(
           new User(
