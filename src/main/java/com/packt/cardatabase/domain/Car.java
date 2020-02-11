@@ -17,7 +17,7 @@ public class Car {
 
   @Id
   @GeneratedValue(strategy = GenerationType.AUTO)
-  private long carid;
+  private long id;
 
   private LocalDateTime localDateTime;
 

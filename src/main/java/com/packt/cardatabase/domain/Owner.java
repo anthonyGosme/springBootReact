@@ -15,7 +15,7 @@ import java.util.List;
 public class Owner {
   @Id
   @GeneratedValue(strategy = GenerationType.AUTO)
-  private long ownerid;
+  private long id;
 
   private String firstname, lastname;
   //  cascade delete = all,   mappedBy=owner -> the car clas has a foeign field owner
