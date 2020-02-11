@@ -2,12 +2,14 @@ package com.packt.cardatabase.domain;
 
 import lombok.Getter;
 import lombok.Setter;
+import lombok.experimental.Accessors;
 
 import javax.persistence.*;
 
 @Entity
 @Getter
 @Setter
+@Accessors(chain = true)
 public class User {
 
   @Id
@@ -23,13 +25,4 @@ public class User {
 
   @Column(nullable = false)
   private String role;
-
-  public User() {}
-
-  public User(String username, String password, String role) {
-    super();
-    this.username = username;
-    this.password = password;
-    this.role = role;
-  }
 }

@@ -15,20 +15,24 @@ import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 
-import java.util.Arrays;
+import java.util.Collections;
 
 @Configuration // switch off default config
 @EnableWebSecurity
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
+  private final UserDetailServiceImpl userDetailService;
 
+  public SecurityConfig(UserDetailServiceImpl userDetailService) {
+    this.userDetailService = userDetailService;
+  }
 
   @Override
   protected void configure(HttpSecurity httpSecurity) throws Exception {
     httpSecurity
         .csrf()
-        .disable() //disalbe csrf protection
-        .cors()//  Cross-Origin Resource Sharing (CORS
+        .disable() // disable csrf protection
+        .cors() //  Cross-Origin Resource Sharing (CORS
         .and()
         .authorizeRequests()
         .antMatchers(HttpMethod.POST, "/login")
@@ -42,40 +46,26 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         .addFilterBefore(new AuthenticationFilter(), UsernamePasswordAuthenticationFilter.class);
   }
 
-   @Autowired private UserDetailServiceImpl userDetailService;
-   @Autowired
-   public void configureGlobal(AuthenticationManagerBuilder authenticationManagerBuilder)
+  @Autowired
+  public void configureGlobal(AuthenticationManagerBuilder authenticationManagerBuilder)
       throws Exception {
-      authenticationManagerBuilder
-          .userDetailsService(userDetailService)
-          .passwordEncoder(new BCryptPasswordEncoder());
-   }
+    authenticationManagerBuilder
+        .userDetailsService(userDetailService)
+        .passwordEncoder(new BCryptPasswordEncoder());
+  }
 
   @Bean
   CorsConfigurationSource corsConfigurationSource() {
     UrlBasedCorsConfigurationSource urlBasedCorsConfigurationSource =
         new UrlBasedCorsConfigurationSource();
     CorsConfiguration corsConfiguration = new CorsConfiguration();
-    corsConfiguration.setAllowedOrigins(Arrays.asList("*"));
-    corsConfiguration.setAllowedMethods(Arrays.asList("*"));
-    corsConfiguration.setAllowedHeaders(Arrays.asList("*"));
+    corsConfiguration.setAllowedOrigins(Collections.singletonList("*"));
+    corsConfiguration.setAllowedMethods(Collections.singletonList("*"));
+    corsConfiguration.setAllowedHeaders(Collections.singletonList("*"));
     corsConfiguration.setAllowCredentials(true);
     corsConfiguration.applyPermitDefaultValues();
-    urlBasedCorsConfigurationSource.registerCorsConfiguration("/**", corsConfiguration); // allow all path
+    urlBasedCorsConfigurationSource.registerCorsConfiguration(
+        "/**", corsConfiguration); // allow all path
     return urlBasedCorsConfigurationSource;
   }
-
-  //    no more load credential from  memory
-  //    @Override
-  //    protected void configure(HttpSecurity http) throws Exception {
-  //        super.configure(http);
-  //    }
-  //    @Bean
-  //    @Override
-  //    public UserDetailsService userDetailsService() {
-  //        UserDetails userDetails =
-  // User.withDefaultPasswordEncoder().username("user").password("password").roles("USER").build();
-  //        return new InMemoryUserDetailsManager(userDetails);
-  //    }
-
 }

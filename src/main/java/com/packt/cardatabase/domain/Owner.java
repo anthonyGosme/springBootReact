@@ -6,19 +6,18 @@ import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
-import java.util.ArrayList;
 import java.util.List;
 
 @Entity // disable for constructor generator to work
 @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
+@Getter
+@Setter
 public class Owner {
   @Id
   @GeneratedValue(strategy = GenerationType.AUTO)
-  @Getter
-  @Setter
   private long ownerid;
 
-  @Getter @Setter private String firstname, lastname;
+  private String firstname, lastname;
   //  cascade delete = all,   mappedBy=owner -> the car clas has a foeign field owner
   //  pas la peinne de recuperer la liste de car de a chaque fois
   @OneToMany(cascade = CascadeType.ALL, mappedBy = "owner", fetch = FetchType.LAZY)
@@ -32,12 +31,4 @@ public class Owner {
   }
 
   public Owner() {}
-
-  public List<Car> getCars() {
-    return new ArrayList<>(this.cars);
-  }
-
-  public void setCars(List<Car> cars) {
-    this.cars = cars;
-  }
 }

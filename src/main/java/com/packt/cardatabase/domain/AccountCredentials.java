@@ -3,8 +3,9 @@ package com.packt.cardatabase.domain;
 import lombok.Getter;
 import lombok.Setter;
 
-@Getter @Setter
+@Getter
+@Setter
 public class AccountCredentials {
-    private String username ;
-    private String password ;
+  private String username;
+  private String password;
 }
