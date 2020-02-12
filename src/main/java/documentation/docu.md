@@ -29,7 +29,4 @@ dbuser
 password
 create dabatabase cardb 
 
-## react
-brew install node
-node -v
-npm -v
+
