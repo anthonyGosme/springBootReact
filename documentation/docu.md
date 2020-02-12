@@ -27,6 +27,9 @@ mysql.server status --user=dbuser
 localhost 3306
 dbuser
 password
-create dabatabase cardb
+create dabatabase cardb 
 
-
+## react
+brew install node
+node -v
+npm -v
