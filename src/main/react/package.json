@@ -16,5 +16,8 @@
     "dirty-chai": "^2.0.1",
     "eslint": "^6.8.0",
     "eslint-plugin-react": "^7.18.3"
+  },
+  "dependencies": {
+    "@material-ui/core": "^4.9.4"
   }
 }

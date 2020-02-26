@@ -29,7 +29,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
   @Override
   protected void configure(HttpSecurity httpSecurity) throws Exception {
-    httpSecurity
+    httpSecurity.csrf().disable().cors().and().authorizeRequests().anyRequest().permitAll() ;
+  /*
+  httpSecurity
+
         .csrf()
         .disable() // disable csrf protection
         .cors() //  Cross-Origin Resource Sharing (CORS
@@ -44,6 +47,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
             new LoginFilter("/login", authenticationManager()),
             UsernamePasswordAuthenticationFilter.class)
         .addFilterBefore(new AuthenticationFilter(), UsernamePasswordAuthenticationFilter.class);
+   */
   }
 
   @Autowired
