@@ -5,6 +5,8 @@ import "react-table-6/react-table.css";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import AddCar from "./AddCar";
+import EditCar from "./EditCar";
+
 class CarList extends Component {
   constructor(props) {
     super(props);
@@ -19,12 +21,34 @@ class CarList extends Component {
       },
       body: JSON.stringify(car)
     })
-      .then(res => this.fetchCars())
+      .then(res => {
+        this.fetchCars();
+      })
       .catch(err => console.error(err));
   }
 
+  updateCar(car, link) {
+    fetch(link, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify(car)
+    })
+      .then(res => {
+        toast.success("car edited", {
+          position: toast.POSITION.BOTTOM_LEFT
+        });
+        this.fetchCars();
+      })
+      .catch(err => {
+        toast.error("error when editing car", {
+          position: toast.POSITION.BOTTOM_LEFT
+        });
+        console.error(err);
+      });
+  }
 
-  
   onDelClick = link => {
     if (window.confirm("are you ok to delete ?")) {
       fetch(link, { method: "DELETE" })
@@ -97,15 +121,14 @@ class CarList extends Component {
         sortable: false,
         width: 100,
         accessor: "_links.self.href",
-        Cell: ({ value }) => (
-            <button
-              onClick={() => {
-                this.onEditClick(value);
-              }}
-            >
-              Edit
-            </button>
-          )
+        Cell: ({ value, row }) => (
+          <EditCar
+            car={row}
+            link={value}
+            updateCar={this.updateCar}
+            fetchCars={this.fetchCar}
+          />
+        )
       }
     ];
 
