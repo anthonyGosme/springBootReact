@@ -6,7 +6,7 @@ node -v
 npm -v
 npx create-react-app cardbfront
 
-
+npm install -s @material-ui/icons
 ## start / build
 cd cardbfront
 npm start
@@ -25,15 +25,17 @@ prettier code formater
 visual studio intellicode
 
 ## add test & other  tools to project 
+
+brew install watchman 
 npm install --save lodash.shuffle
 sudo npm audit fix --force
 npm install --save prop-types
 npm test
 npm install fsevents
 npm install --save-dev chai dirty-chai chai-jest-diff
-
-npm install --save-dev sinon sinon-chai
-
-npm install --save-dev chai-jest-snapshot enzyme-to-json
+npm install --save-dev enzyme enzyme-adapter-react-16 react-test-renderer chai-enzyme@beta
+qq
 
 npm test -- --coverage
+
+
