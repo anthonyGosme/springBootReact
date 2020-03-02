@@ -32,7 +32,10 @@ const Login = () => {
     })
     .catch(err => console.error(err)) 
   }  
-
+const logout =() =>{
+  sessionStorage.removeItem("jwt");
+  setAuth(false);
+}
   
   const handleChange = event => {
     setUser({ ...user, [event.target.name]: event.target.value });

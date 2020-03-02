@@ -8,18 +8,20 @@ import AddCar from "./AddCar";
 import EditCar from "./EditCar";
 import Button from "@material-ui/core/Button";
 import Grid from "@material-ui/core/Grid";
-import {CSVLink} from "react-csv";
+import { CSVLink } from "react-csv";
 
 class CarList extends Component {
   constructor(props) {
     super(props);
     this.state = { cars: [] };
-  } 
+  }
 
   addCar(car) {
+    const token = sessionStorage.getItem("jwt");
     fetch(SERVER_URL + "/api/cars", {
       method: "POST",
       headers: {
+        Authorization: token,
         "Content-Type": "application/json"
       },
       body: JSON.stringify(car)
@@ -31,9 +33,11 @@ class CarList extends Component {
   }
 
   updateCar(car, link) {
+    const token = sessionStorage.getItem("jwt");
     fetch(link, {
       method: "PUT",
       headers: {
+        Authorization: token,
         "Content-Type": "application/json"
       },
       body: JSON.stringify(car)
@@ -53,8 +57,14 @@ class CarList extends Component {
   }
 
   onDelClick = link => {
+    const token = sessionStorage.getItem("jwt");
     if (window.confirm("are you ok to delete ?")) {
-      fetch(link, { method: "DELETE" })
+      fetch(link, {
+        method: "DELETE",
+        headers: {
+          Authorization: token
+        }
+      })
         .then(res => {
           toast.success("car deleted", {
             position: toast.POSITION.BOTTOM_LEFT
@@ -70,7 +80,8 @@ class CarList extends Component {
     }
   };
   fetchCar = () => {
-    fetch(SERVER_URL + "/api/cars")
+    const token = sessionStorage.getItem("jwt");
+    fetch(SERVER_URL + "/api/cars", { headers: { Authorization: token } })
       .then(response => response.json())
       .then(responseData => {
         this.setState({ cars: responseData._embedded.cars });
