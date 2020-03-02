@@ -35,7 +35,13 @@ npm install fsevents
 npm install --save-dev chai dirty-chai chai-jest-diff
 npm install --save-dev enzyme enzyme-adapter-react-16 react-test-renderer chai-enzyme@beta
 qq
-
+#snapshoot
+npm install react-test-renderer -save-dev
 npm test -- --coverage
+
+# debug test mode
+https://create-react-app.dev/docs/debugging-tests/
+npm run test:debug 
+about:inspect
 
 

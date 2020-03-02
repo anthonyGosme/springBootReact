@@ -11,6 +11,7 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
@@ -28,11 +29,13 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
   }
 
   @Override
-  protected void configure(HttpSecurity httpSecurity) throws Exception {
-    httpSecurity.csrf().disable().cors().and().authorizeRequests().anyRequest().permitAll() ;
-  /*
-  httpSecurity
 
+  protected void configure(HttpSecurity httpSecurity) throws Exception {
+    // enable to bypas the security
+    // httpSecurity.csrf().disable().cors().and().authorizeRequests().anyRequest().permitAll() ;
+    // jwt based securtiy
+
+    httpSecurity
         .csrf()
         .disable() // disable csrf protection
         .cors() //  Cross-Origin Resource Sharing (CORS
@@ -47,7 +50,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
             new LoginFilter("/login", authenticationManager()),
             UsernamePasswordAuthenticationFilter.class)
         .addFilterBefore(new AuthenticationFilter(), UsernamePasswordAuthenticationFilter.class);
-   */
   }
 
   @Autowired
@@ -66,6 +68,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     corsConfiguration.setAllowedOrigins(Collections.singletonList("*"));
     corsConfiguration.setAllowedMethods(Collections.singletonList("*"));
     corsConfiguration.setAllowedHeaders(Collections.singletonList("*"));
+    corsConfiguration.setExposedHeaders(Collections.singletonList("Authorization"));
     corsConfiguration.setAllowCredentials(true);
     corsConfiguration.applyPermitDefaultValues();
     urlBasedCorsConfigurationSource.registerCorsConfiguration(

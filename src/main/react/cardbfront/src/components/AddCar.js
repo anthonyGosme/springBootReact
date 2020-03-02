@@ -7,7 +7,6 @@ import DialogContent from "@material-ui/core/DialogContent";
 import DialogTitle from "@material-ui/core/DialogTitle";
 import Button from "@material-ui/core/Button";
 
-
 const AddCar = props => {
   const [open, setOpen] = React.useState(false);
   const [car, setCar] = React.useState({
