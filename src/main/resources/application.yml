@@ -7,11 +7,17 @@ spring:
   data:
     rest:
       base-path: /api
-  datasource:
+  datasource_disabled:
     driver-class-name: org.mariadb.jdbc.Driver
     password: password
     url: jdbc:mariadb://localhost:3306/cardb
     username: dbuser
+  datasource:
+    driver-class-name: org.mariadb.jdbc.Driver
+    password: zgz8d5bpbi5f2wdz
+    url: jdbc:mariadb://g4yltwdo6z0izlm6.chr7pe7iynqr.eu-west-1.rds.amazonaws.com
+    username: xk4ykxwwm7jfd1w0
+    max-active: 10
   h2:
     console:
       enabled: true
